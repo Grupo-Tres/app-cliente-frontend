@@ -1,0 +1,19 @@
+.flex-item {
+    background-color: #EFEFEE;
+    padding: 0px;
+    margin-right: 20px;
+    margin-top: 20px;
+    flex: 33%;
+    max-width: fit-content;
+    flex-direction: row;
+  }
+
+  @media (max-width: 500px) {
+    .flex-item {
+      flex: 100%;
+    }
+
+    .cardapio {
+        margin: 10px;
+    }
+  }
