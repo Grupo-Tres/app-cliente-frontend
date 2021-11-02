@@ -1,17 +1,35 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import React from "react";
+import ReactDOM from "react-dom";
+import "./reset.css";
+import "./index.css";
+import reportWebVitals from "./reportWebVitals";
+import Container from "./component/Container/Container";
+import Item from "./component/Item/Item";
+import Produto from "./component/Produto/Produto";
+import data from "./dataMock";
+
+const secoes = data.map((item) => {
+  const produtos = item.produtos.map((produto) => {
+    return (
+      <Item>
+        <Produto>{produto}</Produto>
+      </Item>
+    );
+  });
+  return (
+    <React.Fragment>
+      <Container secaoClass={item.secao} title={item.titulo}>
+        {produtos}
+      </Container>
+    </React.Fragment>
+  );
+});
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <React.Fragment>{secoes}</React.Fragment>
   </React.StrictMode>,
-  document.getElementById('root')
+  document.getElementsByClassName("cardapio")[0]
 );
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
 reportWebVitals();

@@ -5,9 +5,45 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: #EFEFEE;
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+.header {
+  margin: 0px;
+  width: auto;
+  height: 275px;
+}
+
+.empresa {
+  position: relative;
+  bottom: 100px;
+  height: 175px;
+  margin-top: 0px;
+  margin-left: 32px;
+  margin-right: 32px;
+  background-color: #ffffff;
+}
+
+#imgHeader {
+  position: relative;
+  top: 0px;
+  height: 200px;
+  background-color: #B9B7BD;
+}
+.cardapio{
+  margin: 32px;
+}
+
+footer {
+  position: relative;
+  bottom: 0px;
+  height: 100px;
+  margin-top: 30px;
+  padding: 10px;
+  background-color: #B9B7BD;
 }
