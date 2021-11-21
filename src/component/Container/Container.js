@@ -13,6 +13,7 @@ function Container(params) {
     <section class={params.secaoClass}>
 
     <h3 class="secaoTitle">{params.title}</h3>
+    <hr />
     <div class="flex-container">
         {params.children}
     </div>

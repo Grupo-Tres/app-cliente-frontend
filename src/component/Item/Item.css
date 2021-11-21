@@ -1,8 +1,8 @@
 .flex-item {
     background-color: #EFEFEE;
     padding: 0px;
-    margin-right: 20px;
-    margin-top: 20px;
+    margin-right: 0px;
+    margin-top: 0px;
     flex: 33%;
     max-width: fit-content;
     flex-direction: row;
