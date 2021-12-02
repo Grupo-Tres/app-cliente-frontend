@@ -6,6 +6,8 @@ import reportWebVitals from "./reportWebVitals";
 import Container from "./component/Container/Container";
 import Item from "./component/Item/Item";
 import Produto from "./component/Produto/Produto";
+import Cabecalho from "./component/Cabecalho/Cabecalho"
+import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 
 fetch('http://localhost:5000/api/v1/cardapio')
     .then(function(resposta){
@@ -49,7 +51,8 @@ function renderizar(dadosArray) {
   
   ReactDOM.render(
     <React.StrictMode>
-      <React.Fragment>{secoes}</React.Fragment>
+        <Cabecalho></Cabecalho>
+        <React.Fragment>{secoes}</React.Fragment>
     </React.StrictMode>,
     document.getElementsByClassName("cardapio")[0]
   );

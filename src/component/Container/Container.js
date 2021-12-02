@@ -10,11 +10,11 @@ function Container(params) {
 
   return (
     
-    <section class={params.secaoClass}>
+    <section className={params.secaoClass}>
 
-    <h3 class="secaoTitle">{params.title}</h3>
+    <h3 className="secaoTitle">{params.title}</h3>
     <hr />
-    <div class="flex-container">
+    <div className="flex-container">
         {params.children}
     </div>
     </section>

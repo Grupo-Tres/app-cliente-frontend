@@ -1,9 +1,14 @@
 import React, { useState } from "react";
+import { Modal, Form, CloseButton, Button } from 'react-bootstrap';
 import "./Produto.css";
 
 function Produto(produto) {
   const [quantidade, setQuantidade] = useState(1);
   const [opcaoIndex, setOpcaoIndex] = useState(0);
+
+  const [show, setShow] = useState(false);
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
 
   function click() {
     console.log('Selecionado: ', {
@@ -15,20 +20,22 @@ function Produto(produto) {
   }
 
   return (
-    <div className="container">
-      <div class="produto_titulo">{produto.children.nome.toUpperCase()}</div>
-      <div class="produto_detalhes">
-        <div class="sec-1">
-          <img class="produto_imagem" alt="" src={produto.children.foto} />
+    <div className="container shadow p-2 bg-white rounded">
+      <div className="produto_titulo">{produto.children.nome.toUpperCase()}</div>
+      <div className="produto_detalhes">
+        <div onClick={handleShow} className="sec-1">
+          <img className="produto_imagem" alt="" src={produto.children.foto} />
+          <span>Clique na imagem</span>
         </div>
-        <div class="sec-2">
-          <div class="lb-opcao">Opção:</div>
-          <div class="lb-quantidade">Quantidade:</div>
+        <div className="sec-2">
+          <div className="lb-opcao">Tamanho</div>
+          <div className="lb-quantidade">Quantidade</div>
         </div>
-        <div class="sec-3">
-          <div class="combo-opcao">
-            <select
-              className="sel-opcao"
+        <div className="sec-3">
+          <div className="combo-opcao">
+            <Form.Select
+              size="sm"
+              className="sel-tamanho"
               value={opcaoIndex}
               onChange={(e) => {
                 setOpcaoIndex(parseInt(e.target.value));
@@ -37,9 +44,9 @@ function Produto(produto) {
               {produto.children.opcoes.map((item, indice) => {
                 return <option value={indice}>{item.opcao}</option>;
               })}
-            </select>
+            </Form.Select>
           </div>
-          <div class="contador-quantidade">
+          <div className="contador-quantidade">
             <button
               className="btn-red"
               onClick={() => {
@@ -55,10 +62,10 @@ function Produto(produto) {
               className="btn-add"
               onClick={() => setQuantidade(quantidade + 1)}
             >
-              +
+              + 
             </button>
           </div>
-          <div class="preco">
+          <div className="preco">
              <h6>
               {" "}
               { 
@@ -72,13 +79,30 @@ function Produto(produto) {
             </h6>  
             
           </div>
-          <div class="botao-adicionar">
-            <button 
+          <div className="botao-adicionar">
+            <Button 
               className="btn-add-carrinho"
-              onClick={click} >Adicionar</button>
+              variant="success"
+              onClick={click} >Adicionar</Button>
           </div>
         </div>
       </div>
+
+      <Modal show={show}>
+        <Modal.Header>
+          <Modal.Title>{produto.children.nome.toUpperCase()}</Modal.Title>
+          <CloseButton onClick={handleClose}/>
+        </Modal.Header>
+
+        <Modal.Body>
+          <img src={produto.children.foto} className="img-modal" style={{ height: '10% !important' }}></img>
+          <p>{produto.children.descricao}</p>
+        </Modal.Body>
+
+        <Modal.Footer>
+          <Button className="btn-add-carrinho" variant="success" onClick={handleClose}>Fechar</Button>
+        </Modal.Footer>
+      </Modal>
     </div>
   );
 }
