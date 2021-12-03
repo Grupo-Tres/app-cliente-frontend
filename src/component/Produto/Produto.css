@@ -169,11 +169,14 @@
 
 .img-modal {
   margin-bottom: 18px;
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
   border: 1px;
   border-style: none;
-  border-radius: 10px;
-  height: 100%;
-  width: 100%
+  border-radius: 5px;
+  width: 70% !important;
+  height: auto !important;
 }
 
 .sec-1 span {
@@ -187,4 +190,10 @@
   text-shadow: 0 0 2px black;
 }
 
-
+.meu-modal {
+  text-align: justify !important;
+  max-width: 50vw !important;
+  max-height: 75vw !important;
+  width: 50vw !important;
+  height: 75vw !important;
+}

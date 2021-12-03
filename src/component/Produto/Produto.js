@@ -28,7 +28,7 @@ function Produto(produto) {
           <span>Clique na imagem</span>
         </div>
         <div className="sec-2">
-          <div className="lb-opcao">Tamanho</div>
+          <div className="lb-opcao">Opção</div>
           <div className="lb-quantidade">Quantidade</div>
         </div>
         <div className="sec-3">
@@ -88,7 +88,7 @@ function Produto(produto) {
         </div>
       </div>
 
-      <Modal show={show}>
+      <Modal show={show} dialogClassName="meu-modal">
         <Modal.Header>
           <Modal.Title>{produto.children.nome.toUpperCase()}</Modal.Title>
           <CloseButton onClick={handleClose}/>
