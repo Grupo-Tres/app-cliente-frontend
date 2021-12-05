@@ -9,7 +9,7 @@ function Cabecalho() {
         <div className="shadow p-1 bg-none rounded">
             <Navbar expand="md" bg="light" variant="light">
                 <Container fluid>
-                    <Navbar.Brand className="nav-bar-1" href="#home">
+                    <Navbar.Brand className="nav-bar-1" href="/">
                         <img
                             className="shadow p-1 bg-none rounded"
                             alt=""
@@ -42,10 +42,10 @@ function Cabecalho() {
 
             <Navbar expand="md" bg="light" variant="dark">
                 <Container fluid className="nav-bar-2">
-                    <Navbar.Brand href="#home">Home</Navbar.Brand>
+                    <Navbar.Brand href="/">Home</Navbar.Brand>
                     <Nav className="justify-content-end">
-                        <Nav.Link href="#contato">Contato</Nav.Link>
-                        <Nav.Link href="#registrar">Registrar</Nav.Link>
+                        <Nav.Link href="/contato">Contato</Nav.Link>
+                        <Nav.Link href="/cadastro">Cadastrar</Nav.Link>
                         <Nav.Link href="#entrar">Entrar</Nav.Link>
                     </Nav>
                 </Container>
