@@ -17,9 +17,17 @@
   }
 
   .campo-cep {
-      width: 50%; 
+      width: 32%; 
   }
 
-  Form.Label {
-      color: red !important;
+  .error {
+    border: 2px solid #FF6565 !important;
+  }
+
+  .error-message {
+    color: #FF6565 !important;
+    padding: .5em .2em !important;
+    height: 1em !important;
+    position: relative !important;
+    font-size: .8em !important;
   }
