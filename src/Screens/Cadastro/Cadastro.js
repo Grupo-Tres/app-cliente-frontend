@@ -60,114 +60,270 @@ function Cadastro() {
     };
 
     return (
-        <div>
-            <Cabecalho />
-            <Formik initialValues={{ nome:"", email:"", senha:"", cep:"",
-                rua:"", bairro:"", cidade:"", estado:"", numero:"", telefone:"" }}
-                validationSchema={validationSchema}
-                onSubmit={(values, { setSubmitting, resetForm }) => {
-                    setSubmitting(true);
-                    resetForm();
-                    setSubmitting(false);
+      <div>
+        <Cabecalho />
+        <Formik
+          initialValues={{
+            nome: "",
+            email: "",
+            senha: "",
+            cep: "",
+            rua: "",
+            bairro: "",
+            cidade: "",
+            estado: "",
+            numero: "",
+            complemento: "",
+            telefone: "",
+            admin: false,
+          }}
+          validationSchema={validationSchema}
+          onSubmit={(values, { setSubmitting, resetForm }) => {
+            setSubmitting(true);
+            resetForm();
+            setSubmitting(false);
 
-                    setTimeout(() => {
-                        alert(JSON.stringify(values, null, 2));
-                        resetForm();
-                        setSubmitting(false);
-                    }, 500);
-                }}
-            >
-                {( {values,
-                    isValid,
-                    errors,
-                    touched,
-                    handleChange,
-                    handleBlur,
-                    setFieldValue,
-                    handleSubmit,
-                    isSubmitting }) => (
-                    <Form onSubmit={handleSubmit} className="form-cadastro">
-                        <h4>Preencha seu cadastro para fazer seus pedidos!</h4>
-                        
-                        <Row className="mb-3">
-                            <Form.Group className="form-group" as={Col} controlId="formGridName">
-                                <Form.Label>Nome</Form.Label>
-                                <Form.Control className={touched.nome && errors.nome ? 'error' : null} onChange={handleChange} onBlur={handleBlur} value={values.nome} name="nome" type="text" placeholder="Digite seu nome completo" />
-                                {touched.nome && errors.nome ? (
-                                    <div className="error-message">{errors.nome}</div>
-                                ) : null}
-                            </Form.Group>
-                            <Form.Group className="form-group" as={Col} controlId="formGridEmail">
-                                <Form.Label>Email</Form.Label>
-                                <Form.Control className={touched.email && errors.email ? 'error' : null} onChange={handleChange} onBlur={handleBlur} form="novalidatedform" value={values.email} name="email" type="email" placeholder="usuario@dominio.com" />
-                                {touched.email && errors.email ? (
-                                    <div className="error-message">{errors.email}</div>
-                                ) : null}
-                            </Form.Group>
+            fetch("http://localhost:5000/api/v1/user", {
+              method: "POST",
+              headers: {
+                "Accept": "*/*"
+              },
+              body: JSON.stringify(values)
+            })
+              .then(function (response) {
+                return response.json();
+              })
+              .then(function (data) {
+                console.log(data.status)
+                if (data.status === "error") {
+                    alert(data.msg);
+                } else {
+                    alert("Cadastro realizado com sucesso!");
+                }
+                console.log(data);
+              });
+            setTimeout(() => {
+              resetForm();
+              setSubmitting(false);
+            }, 500);
+          }}
+        >
+          {({
+            values,
+            isValid,
+            errors,
+            touched,
+            handleChange,
+            handleBlur,
+            setFieldValue,
+            handleSubmit,
+            isSubmitting,
+          }) => (
+            <Form onSubmit={handleSubmit} className="form-cadastro">
+              <h4>Preencha seu cadastro para fazer seus pedidos!</h4>
 
-                            <Form.Group className="form-group" as={Col} controlId="formGridPassword">
-                                <Form.Label>Senha</Form.Label>
-                                <Form.Control className={touched.senha && errors.senha ? 'error' : null} onChange={handleChange} onBlur={handleBlur} value={values.senha} name="senha" type="password" placeholder="Apenas letras, mínimo de 6 caracteres" />
-                                {touched.senha && errors.senha ? (
-                                    <div className="error-message">{errors.senha}</div>
-                                ) : null}
-                            </Form.Group>
-                        </Row>
+              <Row className="mb-3">
+                <Form.Group
+                  className="form-group"
+                  as={Col}
+                  controlId="formGridName"
+                >
+                  <Form.Label>Nome</Form.Label>
+                  <Form.Control
+                    className={touched.nome && errors.nome ? "error" : null}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    value={values.nome}
+                    name="nome"
+                    type="text"
+                    placeholder="Digite seu nome completo"
+                  />
+                  {touched.nome && errors.nome ? (
+                    <div className="error-message">{errors.nome}</div>
+                  ) : null}
+                </Form.Group>
+                <Form.Group
+                  className="form-group"
+                  as={Col}
+                  controlId="formGridEmail"
+                >
+                  <Form.Label>Email</Form.Label>
+                  <Form.Control
+                    className={touched.email && errors.email ? "error" : null}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    form="novalidatedform"
+                    value={values.email}
+                    name="email"
+                    type="email"
+                    placeholder="usuario@dominio.com"
+                  />
+                  {touched.email && errors.email ? (
+                    <div className="error-message">{errors.email}</div>
+                  ) : null}
+                </Form.Group>
 
-                        <Form.Group className="campo-cep form-group" as={Col} controlId="formGridZip">
-                                <Form.Label>CEP</Form.Label>
-                                <Form.Control className={touched.cep && errors.cep ? 'error' : null} onChange={handleChange} onBlur={(ev) => pesquisaCep(ev, setFieldValue)} value={values.cep} name="cep" placeholder="Digite seu CEP no formato XXXXX-XXX"/>
-                                {touched.cep && errors.cep ? (
-                                    <div className="error-message">{errors.cep}</div>
-                                ) : null}
-                        </Form.Group>
+                <Form.Group
+                  className="form-group"
+                  as={Col}
+                  controlId="formGridPassword"
+                >
+                  <Form.Label>Senha</Form.Label>
+                  <Form.Control
+                    className={touched.senha && errors.senha ? "error" : null}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    value={values.senha}
+                    name="senha"
+                    type="password"
+                    placeholder="Apenas letras, mínimo de 6 caracteres"
+                  />
+                  {touched.senha && errors.senha ? (
+                    <div className="error-message">{errors.senha}</div>
+                  ) : null}
+                </Form.Group>
+              </Row>
 
-                        <Row className="mb-3">
-                            <Form.Group as={Col} className="mb-3 form-group" controlId="formGridAddress1">
-                                <Form.Label id='rua'>Rua</Form.Label>
-                                <Form.Control onChange={handleChange} onBlur={handleBlur} value={values.rua} name="rua" readOnly placeholder="..." />
-                            </Form.Group>
-                            
-                            <Form.Group as={Col} className="mb-3 form-group" controlId="formGridAddress1">
-                                <Form.Label>Bairro</Form.Label>
-                                <Form.Control onChange={handleChange} onBlur={handleBlur} value={values.bairro} name="bairro" readOnly placeholder="..." />
-                            </Form.Group>
+              <Form.Group
+                className="campo-cep form-group"
+                as={Col}
+                controlId="formGridZip"
+              >
+                <Form.Label>CEP</Form.Label>
+                <Form.Control
+                  className={touched.cep && errors.cep ? "error" : null}
+                  onChange={handleChange}
+                  onBlur={(ev) => pesquisaCep(ev, setFieldValue)}
+                  value={values.cep}
+                  name="cep"
+                  placeholder="Digite seu CEP no formato XXXXX-XXX"
+                />
+                {touched.cep && errors.cep ? (
+                  <div className="error-message">{errors.cep}</div>
+                ) : null}
+              </Form.Group>
 
-                            <Form.Group as={Col} className="mb-3 form-group" controlId="formGridAddress2">
-                                <Form.Label>Cidade</Form.Label>
-                                <Form.Control onChange={handleChange} onBlur={handleBlur} value={values.cidade} name="cidade" readOnly placeholder="..." />
-                            </Form.Group>
-                        </Row>
+              <Row className="mb-3">
+                <Form.Group
+                  as={Col}
+                  className="mb-3 form-group"
+                  controlId="formGridAddress1"
+                >
+                  <Form.Label id="rua">Rua</Form.Label>
+                  <Form.Control
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    value={values.rua}
+                    name="rua"
+                    readOnly
+                    placeholder="..."
+                  />
+                </Form.Group>
 
-                        <Row className="mb-3">
-                            <Form.Group className="form-group" as={Col} controlId="formGridCity">
-                                <Form.Label>Estado</Form.Label>
-                                <Form.Control onChange={handleChange} onBlur={handleBlur} value={values.estado} name="estado" readOnly placeholder="..."/>
-                            </Form.Group>
+                <Form.Group
+                  as={Col}
+                  className="mb-3 form-group"
+                  controlId="formGridAddress1"
+                >
+                  <Form.Label>Bairro</Form.Label>
+                  <Form.Control
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    value={values.bairro}
+                    name="bairro"
+                    readOnly
+                    placeholder="..."
+                  />
+                </Form.Group>
 
-                            <Form.Group className="form-group" as={Col} controlId="formGridNum">
-                                <Form.Label>Número</Form.Label>
-                                <Form.Control className={touched.numero && errors.numero ? 'error' : null} onChange={handleChange} onBlur={handleBlur} value={values.numero} name="numero" placeholder="Digite o número de sua residência"/>
-                                {touched.numero && errors.numero ? (
-                                    <div className="error-message">{errors.numero}</div>
-                                ) : null}
-                            </Form.Group>
+                <Form.Group
+                  as={Col}
+                  className="mb-3 form-group"
+                  controlId="formGridAddress2"
+                >
+                  <Form.Label>Cidade</Form.Label>
+                  <Form.Control
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    value={values.cidade}
+                    name="cidade"
+                    readOnly
+                    placeholder="..."
+                  />
+                </Form.Group>
+              </Row>
 
-                            <Form.Group className="form-group" as={Col} controlId="formGridTel">
-                                <Form.Label>Telefone</Form.Label>
-                                <Form.Control className={touched.telefone && errors.telefone ? 'error' : null} onChange={handleChange} onBlur={handleBlur} value={values.telefone} name="telefone" type="numeric" placeholder="(11) 99999-9999"/>
-                                {touched.telefone && errors.telefone ? (
-                                    <div className="error-message">{errors.telefone}</div>
-                                ) : null}
-                            </Form.Group>
-                        </Row>
+              <Row className="mb-3">
+                <Form.Group
+                  className="form-group"
+                  as={Col}
+                  controlId="formGridCity"
+                >
+                  <Form.Label>Estado</Form.Label>
+                  <Form.Control
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    value={values.estado}
+                    name="estado"
+                    readOnly
+                    placeholder="..."
+                  />
+                </Form.Group>
 
-                        <Button className="btn-enviar" variant="success" type="submit" disabled={isSubmitting}>
-                            Enviar
-                        </Button>
-                    </Form>)}
-            </Formik>
-        </div>
+                <Form.Group
+                  className="form-group"
+                  as={Col}
+                  controlId="formGridNum"
+                >
+                  <Form.Label>Número</Form.Label>
+                  <Form.Control
+                    className={touched.numero && errors.numero ? "error" : null}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    value={values.numero}
+                    name="numero"
+                    placeholder="Digite o número de sua residência"
+                  />
+                  {touched.numero && errors.numero ? (
+                    <div className="error-message">{errors.numero}</div>
+                  ) : null}
+                </Form.Group>
+
+                <Form.Group
+                  className="form-group"
+                  as={Col}
+                  controlId="formGridTel"
+                >
+                  <Form.Label>Telefone</Form.Label>
+                  <Form.Control
+                    className={
+                      touched.telefone && errors.telefone ? "error" : null
+                    }
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    value={values.telefone}
+                    name="telefone"
+                    type="numeric"
+                    placeholder="(11) 99999-9999"
+                  />
+                  {touched.telefone && errors.telefone ? (
+                    <div className="error-message">{errors.telefone}</div>
+                  ) : null}
+                </Form.Group>
+              </Row>
+
+              <Button
+                className="btn-enviar"
+                variant="success"
+                type="submit"
+                disabled={isSubmitting}
+              >
+                Enviar
+              </Button>
+            </Form>
+          )}
+        </Formik>
+      </div>
     );
 }
 
