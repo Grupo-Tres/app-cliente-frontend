@@ -48,7 +48,6 @@ function Cadastro() {
             return;
         }
     
-        // PARA TESTES, RETIRAR NA VERSAO
         fetch(`https://viacep.com.br/ws/${cep}/json/`)
             .then((res) => res.json())
             .then((data) => {
@@ -292,6 +291,28 @@ function Cadastro() {
                 <Form.Group
                   className="form-group"
                   as={Col}
+                  controlId="formGridComp"
+                >
+                  <Form.Label>Complemento</Form.Label>
+                  <Form.Control
+                    className={
+                      touched.complemento && errors.complemento ? "error" : null
+                    }
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    value={values.complemento}
+                    name="complemento"
+                    type="text"
+                    placeholder="apto, bloco, casa"
+                  />
+                  {touched.complemento && errors.complemento ? (
+                    <div className="error-message">{errors.complemento}</div>
+                  ) : null}
+                </Form.Group>
+                
+                <Form.Group
+                  className="form-group"
+                  as={Col}
                   controlId="formGridTel"
                 >
                   <Form.Label>Telefone</Form.Label>
@@ -310,6 +331,7 @@ function Cadastro() {
                     <div className="error-message">{errors.telefone}</div>
                   ) : null}
                 </Form.Group>
+             
               </Row>
 
               <Button
