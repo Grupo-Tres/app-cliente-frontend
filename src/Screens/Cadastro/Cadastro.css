@@ -1,0 +1,33 @@
+.btn-enviar {
+    width: 142px;
+    height: 28px;
+    background-color: #008c45;
+    line-height: 16px !important;
+    margin-top: 20px;
+  }
+
+  .form-cadastro {
+      margin-top: 40px;
+  }
+
+ .form-group {
+      margin-top: 15px !important;
+      font-size: 1.5vw;
+
+  }
+
+  .campo-cep {
+      width: 32%; 
+  }
+
+  .error {
+    border: 2px solid #FF6565 !important;
+  }
+
+  .error-message {
+    color: #FF6565 !important;
+    padding: .5em .2em !important;
+    height: 1em !important;
+    position: relative !important;
+    font-size: .8em !important;
+  }

@@ -1,0 +1,18 @@
+.nav-bar-1 {
+    font-size: 3vw !important;
+    text-shadow: 3px 3px 0px rgba(0,0,0,0.2)
+}
+
+.nav-bar-2 {
+    display: flex !important;
+    text-shadow: 1px 1px 1px rgba(0,0,0,0.2);
+    background: rgb(0,140,69);
+    background: -moz-linear-gradient(90deg, rgba(0,140,69,1) 20%, rgba(244,249,255,1) 50%, rgba(205,33,42,1) 80%);
+    background: -webkit-linear-gradient(90deg, rgba(0,140,69,1) 20%, rgba(244,249,255,1) 50%, rgba(205,33,42,1) 80%);
+    background: linear-gradient(90deg, rgba(0,140,69,1) 20%, rgba(244,249,255,1) 50%, rgba(205,33,42,1) 80%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#008c45",endColorstr="#cd212a",GradientType=1);
+}
+
+.logo2 {
+    margin-left: 15px;
+}

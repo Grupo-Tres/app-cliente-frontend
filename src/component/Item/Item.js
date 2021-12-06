@@ -2,7 +2,7 @@ import './Item.css'
 
 function Item(props) {
     return (
-        <div class="flex-item">
+        <div className="flex-item shadow p-2 mb-3 bg-white rounded">
             {props.children}
         </div>
     )
