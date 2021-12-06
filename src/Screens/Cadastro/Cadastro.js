@@ -195,7 +195,7 @@ function Cadastro() {
                   onBlur={(ev) => pesquisaCep(ev, setFieldValue)}
                   value={values.cep}
                   name="cep"
-                  placeholder="Digite seu CEP no formato XXXXX-XXX"
+                  placeholder="Formato: XXXXX-XXX"
                 />
                 {touched.cep && errors.cep ? (
                   <div className="error-message">{errors.cep}</div>
@@ -281,7 +281,7 @@ function Cadastro() {
                     onBlur={handleBlur}
                     value={values.numero}
                     name="numero"
-                    placeholder="Digite o número de sua residência"
+                    placeholder="Número da residência"
                   />
                   {touched.numero && errors.numero ? (
                     <div className="error-message">{errors.numero}</div>
