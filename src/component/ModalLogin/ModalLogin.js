@@ -1,9 +1,17 @@
-import React from "react";
+import React, { useState } from "react";
 import { Modal, Form, Row, Col, Nav, Button } from 'react-bootstrap';
 import "./ModalLogin.css";
 import logo2 from '../../assets/pizza.png';
 
 function ModalLogin(props) {
+    const [email, setEmail] = useState(null);
+    const [senha, setSenha] = useState(null);
+    
+    const enviarForm = () => {
+        alert(`Email:${email}\nSenha:${senha}`);
+        props.onHide();
+    }
+
     return (
         <div>
             <Modal {...props} aria-labelledby="contained-modal-title-vcenter" dialogClassName="modal-login">
@@ -31,6 +39,8 @@ function ModalLogin(props) {
                                     name="email"
                                     type="email"
                                     placeholder="Informe seu email"
+                                    value={email}
+                                    onChange={e => setEmail(e.target.value)}
                                 />
                             </Form.Group>
                         </Row>
@@ -46,6 +56,8 @@ function ModalLogin(props) {
                                     name="senha"
                                     type="password"
                                     placeholder="Informe sua senha"
+                                    value={senha}
+                                    onChange={e => setSenha(e.target.value)}
                                 />
                             </Form.Group>
                             <Nav.Link className="lk-home" href="/cadastro">Não é cadastrado? Clique aqui!</Nav.Link>
@@ -54,7 +66,7 @@ function ModalLogin(props) {
 
                 </Modal.Body>
                 <Modal.Footer>
-                    <Button variant="success" className="btn-entrar" onClick={props.onHide}>Entrar</Button>
+                    <Button variant="success" className="btn-entrar" onClick={enviarForm}>Entrar</Button>
                 </Modal.Footer>
             </Modal>
         </div>
