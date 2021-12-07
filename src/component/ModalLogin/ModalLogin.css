@@ -37,3 +37,13 @@
       color: #008c45;
      
   }
+
+  .msg-login-erro {
+      color: red;
+      text-align: left;
+  }
+
+  .msg-login-ok {
+      color: rgb(79, 79, 241);
+      text-align: left;
+  }

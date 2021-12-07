@@ -7,8 +7,31 @@ import Homescreen from "../../Screens/Homescreen/Homescreen";
 import ReactDOM from "react-dom";
 
 function ModalLogin(props) {
-  const [email, setEmail] = useState(null);
-  const [senha, setSenha] = useState(null);
+  const [email, setEmail] = useState("");
+  const [senha, setSenha] = useState("");
+  const [mensagem, setMensagem] = useState("");
+  const [estiloMensagem, setEstiloMensagem] = useState("");
+
+  const falhaLogin = () => {
+    setMensagem("Login inválido. Tente novamente.");
+    setEstiloMensagem("msg-login-erro");
+    setEmail("");
+    setSenha("");
+  }
+
+  const okLogin = () => {
+    setMensagem("Login realizado com sucesso, aguarde um instante...");
+    setEstiloMensagem("msg-login-ok");
+    setTimeout(() => {
+        props.onHide(); 
+        ReactDOM.render(
+            <React.StrictMode>
+              <Homescreen />
+            </React.StrictMode>,
+            document.getElementsByClassName("root")[0]
+          );
+    }, 2000);
+  }
 
   const enviarForm = () => {
     const corpo = {
@@ -44,17 +67,16 @@ function ModalLogin(props) {
           cookies.set("token", data.token, { path: "/" });
           console.log(cookies.get("token"));
           console.log("Documento: ", document.cookie);
-          ReactDOM.render(
-            <React.StrictMode>
-              <Homescreen />
-            </React.StrictMode>,
-            document.getElementsByClassName("root")[0]
-          );
+         
+          okLogin();
+        }
+        else{
+            falhaLogin();
         }
         //Para deslogar:
         //cookies.remove('token', { path: '/' });
       });
-    props.onHide();
+    
   };
 
   return (
@@ -108,6 +130,7 @@ function ModalLogin(props) {
               <Nav.Link className="lk-home" href="/cadastro">
                 Não é cadastrado? Clique aqui!
               </Nav.Link>
+              <div className={estiloMensagem}>{mensagem}</div>
             </Row>
           </Form>
         </Modal.Body>
