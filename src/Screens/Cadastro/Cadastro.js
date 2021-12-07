@@ -1,6 +1,5 @@
 import React from 'react';
 import './Cadastro.css';
-import Cabecalho from "../../component/Cabecalho/Cabecalho";
 import {Row, Col, Button, Form} from 'react-bootstrap';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
@@ -60,7 +59,6 @@ function Cadastro() {
 
     return (
       <div>
-        <Cabecalho />
         <Formik
           initialValues={{
             nome: "",

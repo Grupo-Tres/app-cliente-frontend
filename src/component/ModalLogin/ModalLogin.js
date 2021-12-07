@@ -3,8 +3,6 @@ import { Modal, Form, Row, Col, Nav, Button } from "react-bootstrap";
 import "./ModalLogin.css";
 import logo2 from "../../assets/pizza.png";
 import Cookies from "universal-cookie";
-import Homescreen from "../../Screens/Homescreen/Homescreen";
-import ReactDOM from "react-dom";
 
 function ModalLogin(props) {
   const [email, setEmail] = useState("");
@@ -23,13 +21,8 @@ function ModalLogin(props) {
     setMensagem("Login realizado com sucesso, aguarde um instante...");
     setEstiloMensagem("msg-login-ok");
     setTimeout(() => {
-        props.onHide(); 
-        ReactDOM.render(
-            <React.StrictMode>
-              <Homescreen />
-            </React.StrictMode>,
-            document.getElementsByClassName("root")[0]
-          );
+       props.onHide(); 
+       window.location.href = '/';
     }, 2000);
   }
 
