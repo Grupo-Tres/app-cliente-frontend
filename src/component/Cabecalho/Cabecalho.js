@@ -1,10 +1,17 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Navbar, Nav, Container } from 'react-bootstrap';
 import logo from '../../assets/logo_corleone.png';
 import logo2 from '../../assets/pizza.png';
+import ModalLogin from '../ModalLogin/ModalLogin';
 import './Cabecalho.css'
 
 function Cabecalho() {
+    const [modalShow, setModalShow] = useState(false);
+
+    const mostrarModal = () => {
+        setModalShow(true);
+    }
+
     return (
         <div className="shadow p-1 bg-none rounded">
             <Navbar expand="md" bg="light" variant="light">
@@ -42,14 +49,16 @@ function Cabecalho() {
 
             <Navbar expand="md" bg="light" variant="dark">
                 <Container fluid className="nav-bar-2">
-                    <Navbar.Brand href="/">Home</Navbar.Brand>
+                    <Navbar.Brand href="/">Cardápio</Navbar.Brand>
                     <Nav className="justify-content-end">
                         <Nav.Link href="/contato">Contato</Nav.Link>
                         <Nav.Link href="/cadastro">Cadastrar</Nav.Link>
-                        <Nav.Link href="#entrar">Entrar</Nav.Link>
+                        <Nav.Link onClick={mostrarModal}>Entrar</Nav.Link>
                     </Nav>
                 </Container>
             </Navbar>
+
+            <ModalLogin show={modalShow} onHide={() => setModalShow(false)}></ModalLogin>
         </div>
     )
 }

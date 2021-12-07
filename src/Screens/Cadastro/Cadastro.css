@@ -8,6 +8,9 @@
 
   .form-cadastro {
       margin-top: 40px;
+      width: 75% !important;
+      margin-left: auto;
+      margin-right: auto;
   }
 
  .form-group {
@@ -29,5 +32,9 @@
     padding: .5em .2em !important;
     height: 1em !important;
     position: relative !important;
-    font-size: .8em !important;
+    font-size: .6em !important;
   }
+
+  ::-webkit-input-placeholder { /* WebKit, Blink, Edge */
+    font-size: 1vw !important;
+}
