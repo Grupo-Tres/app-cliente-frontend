@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./Homescreen.css";
 import Produto from "../../component/Produto/Produto";
-import Cabecalho from "../../component/Cabecalho/Cabecalho";
 import Container from "../../component/Container/Container";
 import Item from "../../component/Item/Item";
 
@@ -58,7 +57,6 @@ function Homescreen() {
 
   return (
     <div>
-      <Cabecalho />
       <div>{secoes}</div>
     </div>
   );
