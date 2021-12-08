@@ -1,14 +1,16 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { Modal, Form, Row, Col, Nav, Button } from "react-bootstrap";
 import "./ModalLogin.css";
 import logo2 from "../../assets/pizza.png";
 import Cookies from "universal-cookie";
+import { userContext } from '../../userContext';
 
 function ModalLogin(props) {
   const [email, setEmail] = useState("");
   const [senha, setSenha] = useState("");
   const [mensagem, setMensagem] = useState("");
   const [estiloMensagem, setEstiloMensagem] = useState("");
+  const user = useContext(userContext);
 
   const falhaLogin = () => {
     setMensagem("Login inválido. Tente novamente.");
@@ -22,7 +24,7 @@ function ModalLogin(props) {
     setEstiloMensagem("msg-login-ok");
     setTimeout(() => {
        props.onHide(); 
-       window.location.href = '/';
+      //  window.location.href = '/';
     }, 2000);
   }
 
@@ -59,6 +61,8 @@ function ModalLogin(props) {
           console.log("Logado: ", data);
           cookies.set("token", data.token, { path: "/" });
           console.log(cookies.get("token"));
+          user.token = (cookies.get("token"));
+          user.nome = (data.user.nome);
           console.log("Documento: ", document.cookie);
          
           okLogin();
