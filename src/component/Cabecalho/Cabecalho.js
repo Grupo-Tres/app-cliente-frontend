@@ -16,8 +16,8 @@ function Cabecalho() {
 
     const logoff = () => {
         cookies.remove('token');
-        cookies.remove('Pedido')
-        console.log("Removido")
+        cookies.remove('pedido')
+        cookies.remove('carrinho')
     }
 
     const mostrarModal = () => {
