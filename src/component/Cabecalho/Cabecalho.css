@@ -24,3 +24,13 @@
 .nome-user {
     margin-left: 7px;
 }
+
+.offcanvas {
+    border-radius: 10px;
+    width: 600px;
+    padding-top: 20px;
+    margin-top: 20px;
+    margin-right: 10px;
+    margin-bottom: 20px;
+    
+}

@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
-import { Navbar, Nav, Container, NavDropdown } from 'react-bootstrap';
+import { Navbar, Nav, Container, NavDropdown, Button } from 'react-bootstrap';
 import logo from '../../assets/logo_corleone.png';
 import logo2 from '../../assets/pizza.png';
 import ModalLogin from '../ModalLogin/ModalLogin';
 import './Cabecalho.css';
 import { FiUser, FiShoppingCart } from 'react-icons/fi';
 import Cookies from "universal-cookie";
+import Offcanvas from 'react-bootstrap/Offcanvas'
 
 function Cabecalho() {
     const [modalShow, setModalShow] = useState(false);
@@ -23,6 +24,28 @@ function Cabecalho() {
     const mostrarModal = () => {
         setModalShow(true);
     }
+
+    function ToggleOffcanvas({ ...props }) {
+        const [show, setShow] = useState(false);
+      
+        const handleClose = () => setShow(false);
+        const handleShow = () => setShow(true);
+      
+        return (
+          <>
+            <FiShoppingCart onClick={handleShow} className="icon-usuario"/>
+      
+            <Offcanvas className="offcanvas" show={show} onHide={handleClose} {...props}>
+              <Offcanvas.Header closeButton>
+                <Offcanvas.Title>Meu Pedido <FiShoppingCart/></Offcanvas.Title>
+              </Offcanvas.Header>
+              <Offcanvas.Body>
+                Inserir logica para criar itens do carrinho de compras
+              </Offcanvas.Body>
+            </Offcanvas>
+          </>
+        );
+      }
 
     return (
         <div className="shadow p-1 bg-none rounded">
@@ -76,7 +99,7 @@ function Cabecalho() {
                           <Navbar.Brand href="/">Cardápio</Navbar.Brand>
                           <Nav className="justify-content-end">
                               <Nav.Link href="/contato">Contato</Nav.Link>
-                              <Nav.Link href=""><FiShoppingCart className="icon-usuario"/></Nav.Link>
+                              <Nav.Link href=""><ToggleOffcanvas placement='end' scroll='true'/></Nav.Link>
                                 <NavDropdown
                                     title={
                                         <span>
