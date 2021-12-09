@@ -13,10 +13,11 @@ function Produto(produto) {
   const handleShow = () => setShow(true);
 
   const cookies = new Cookies();
+  
 
   function click() {
     const token = cookies.get("token")
-    const cookiePegoPedido = cookies.get("Pedido")
+    const cookiePegoPedido = cookies.get("pedido")
 console.log("cookiePegoPedido: ", cookiePegoPedido)
     if (cookiePegoPedido) {
       cookiePegoPedido.forEach(element => {
@@ -57,10 +58,11 @@ console.log("Corpo do pedido: ", pedidoPendente.id)
                 status: data.pedido.status,
               }]
               console.log("Novo cookie: ", novoCookie)
-              cookies.set("Pedido", novoCookie, { path: "/" });
+              cookies.set("pedido", novoCookie, { path: "/" });
               setPedido(novoCookie)
             } 
             console.log("Dados do Carrinho: ", data)
+            cookies.set("carrinho", data, { path: "/" });
             return data;
           })
           .catch(function (error) {
