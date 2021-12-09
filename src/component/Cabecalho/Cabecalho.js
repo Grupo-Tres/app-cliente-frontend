@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Navbar, Nav, Container } from 'react-bootstrap';
+import { Navbar, Nav, Container, NavDropdown } from 'react-bootstrap';
 import logo from '../../assets/logo_corleone.png';
 import logo2 from '../../assets/pizza.png';
 import ModalLogin from '../ModalLogin/ModalLogin';
@@ -76,10 +76,20 @@ function Cabecalho() {
                           <Navbar.Brand href="/">Cardápio</Navbar.Brand>
                           <Nav className="justify-content-end">
                               <Nav.Link href="/contato">Contato</Nav.Link>
-                              <Nav.Link href="/" onClick={logoff}>Sair</Nav.Link>
                               <Nav.Link href=""><FiShoppingCart className="icon-usuario"/></Nav.Link>
-                              <Nav.Link href=""><FiUser className="icon-usuario"/><span className="nome-user"></span></Nav.Link>
-                          </Nav>
+                                <NavDropdown
+                                    title={
+                                        <span>
+                                            <FiUser className="icon-usuario"/> Opções
+                                        </span>
+                                    }
+                                id='collasible-nav-dropdown'>
+                                <NavDropdown.Item href="#action/3.1">Meus Pedidos</NavDropdown.Item>
+                                <NavDropdown.Item href="#action/3.2">Minha Conta</NavDropdown.Item>
+                                <NavDropdown.Divider />
+                                <NavDropdown.Item href="/" onClick={logoff}>Sair</NavDropdown.Item>
+                              </NavDropdown>
+                           </Nav>
                       </Container>
                    </Navbar>
                 }
