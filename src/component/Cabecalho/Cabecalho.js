@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState } from 'react';
 import { Navbar, Nav, Container } from 'react-bootstrap';
 import logo from '../../assets/logo_corleone.png';
 import logo2 from '../../assets/pizza.png';
@@ -16,6 +16,7 @@ function Cabecalho() {
 
     const logoff = () => {
         cookies.remove('token');
+        cookies.remove('Pedido')
         console.log("Removido")
     }
 
