@@ -1,22 +1,76 @@
 import React, { useState } from "react";
 import { Modal, Form, CloseButton, Button } from 'react-bootstrap';
 import "./Produto.css";
+import Cookies from "universal-cookie";
 
 function Produto(produto) {
   const [quantidade, setQuantidade] = useState(1);
   const [opcaoIndex, setOpcaoIndex] = useState(0);
 
   const [show, setShow] = useState(false);
+  const [pedidoPendente, setPedido] = useState({});
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
+  const cookies = new Cookies();
+
   function click() {
-    console.log('Selecionado: ', {
-      produtoId: produto.children.id,
-      opcao: opcaoIndex,
-      quantidade: quantidade,
-      valorTotal: produto.children.opcoes[opcaoIndex].preco * quantidade
-    });
+    const token = cookies.get("token")
+    const cookiePegoPedido = cookies.get("Pedido")
+console.log("cookiePegoPedido: ", cookiePegoPedido)
+    if (cookiePegoPedido) {
+      cookiePegoPedido.forEach(element => {
+        if (element.status === "Pendente") {
+          setPedido(element)
+        }
+      });
+    }
+
+
+    if (token) {
+
+       const corpo = {
+        token: token,
+        idPedido: cookiePegoPedido, 
+        produtoId: produto.children.id,
+        nome: produto.children.nome,
+        opcao: produto.children.opcoes[opcaoIndex].opcao,
+        quantidade: quantidade,
+        preco: produto.children.opcoes[opcaoIndex].preco
+      }
+console.log("Corpo do pedido: ", pedidoPendente.id)
+
+        fetch("http://localhost:5000/api/v1/addcarrinho", {
+          method: "POST",
+          headers: {
+            "Accept": "*/*"
+          },
+          body: JSON.stringify(corpo),
+        })
+          .then(function (response) {
+            return response.json();
+          })
+          .then(function (data) {
+            if (!cookiePegoPedido) {
+              const novoCookie = [{
+                id: data.pedido.id,
+                status: data.pedido.status,
+              }]
+              console.log("Novo cookie: ", novoCookie)
+              cookies.set("Pedido", novoCookie, { path: "/" });
+              setPedido(novoCookie)
+            } 
+            console.log("Dados do Carrinho: ", data)
+            return data;
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
+        //cookies.set("numeroPedido", Math.random() * 100, { path: "/" });
+    } else {
+      alert('Faça login para adicionar produtos ao carrinho');
+    }
+    
   }
 
   return (
