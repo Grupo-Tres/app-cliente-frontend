@@ -6,10 +6,20 @@ import ModalLogin from '../ModalLogin/ModalLogin';
 import './Cabecalho.css';
 import { FiUser, FiShoppingCart } from 'react-icons/fi';
 import { userContext } from '../../userContext';
+import Cookies from "universal-cookie";
 
 function Cabecalho() {
     const [modalShow, setModalShow] = useState(false);
     const user = useContext(userContext);
+    const cookies = new Cookies();
+
+    const token = cookies.get('token');
+    console.log(token)
+
+    const logoff = () => {
+        cookies.remove('token');
+        console.log("Removido")
+    }
 
     const mostrarModal = () => {
         setModalShow(true);
@@ -51,7 +61,7 @@ function Cabecalho() {
             </Navbar>
 
             <div>
-                {user.token === null ?
+                {token === undefined ?
                     <Navbar expand="md" bg="light" variant="dark">
                         <Container fluid className="nav-bar-2">
                             <Navbar.Brand href="/">Cardápio</Navbar.Brand>
@@ -67,6 +77,7 @@ function Cabecalho() {
                           <Navbar.Brand href="/">Cardápio</Navbar.Brand>
                           <Nav className="justify-content-end">
                               <Nav.Link href="/contato">Contato</Nav.Link>
+                              <Nav.Link href="/" onClick={logoff}>Sair</Nav.Link>
                               <Nav.Link href=""><FiShoppingCart className="icon-usuario"/></Nav.Link>
                               <Nav.Link href=""><FiUser className="icon-usuario"/><span className="nome-user">{user.nome}</span></Nav.Link>
                           </Nav>
