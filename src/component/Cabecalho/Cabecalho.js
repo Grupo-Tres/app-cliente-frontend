@@ -15,6 +15,7 @@ function Cabecalho() {
 
     const token = cookies.get('token');
     console.log(token)
+    const carrinho = cookies.get('carrinho');
 
     const logoff = () => {
         cookies.remove('token');
@@ -41,7 +42,7 @@ function Cabecalho() {
                 <Offcanvas.Title>Meu Pedido <FiShoppingCart/></Offcanvas.Title>
               </Offcanvas.Header>
               <Offcanvas.Body>
-                <Carrinho/>
+                <Carrinho nx={carrinho}>Teste</Carrinho>
               </Offcanvas.Body>
             </Offcanvas>
           </>
