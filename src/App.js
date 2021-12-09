@@ -1,18 +1,14 @@
 import './App.css';
-import React, { useState } from 'react';
+import React from 'react';
 import { BrowserRouter as Router, Routes } from 'react-router-dom';
 import Homescreen from './Screens/Homescreen/Homescreen.js';
 import Cadastro from './Screens/Cadastro/Cadastro.js';
 import Contato from './Screens/Contato/Contato.js';
 import Layout from './component/Layout/Layout';
 import { Route } from 'react-router';
-import { userContext } from './userContext';
-
-const user = { nome: null, token: null};
 
 function App() {
   return (
-    <userContext.Provider value={user}>
       <Layout>
         <Router>
           <Routes>
@@ -22,7 +18,6 @@ function App() {
           </Routes>
         </Router>
       </Layout>
-    </userContext.Provider>
   );
 }
 

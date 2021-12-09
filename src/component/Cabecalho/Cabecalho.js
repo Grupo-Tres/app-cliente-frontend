@@ -5,12 +5,10 @@ import logo2 from '../../assets/pizza.png';
 import ModalLogin from '../ModalLogin/ModalLogin';
 import './Cabecalho.css';
 import { FiUser, FiShoppingCart } from 'react-icons/fi';
-import { userContext } from '../../userContext';
 import Cookies from "universal-cookie";
 
 function Cabecalho() {
     const [modalShow, setModalShow] = useState(false);
-    const user = useContext(userContext);
     const cookies = new Cookies();
 
     const token = cookies.get('token');
@@ -79,7 +77,7 @@ function Cabecalho() {
                               <Nav.Link href="/contato">Contato</Nav.Link>
                               <Nav.Link href="/" onClick={logoff}>Sair</Nav.Link>
                               <Nav.Link href=""><FiShoppingCart className="icon-usuario"/></Nav.Link>
-                              <Nav.Link href=""><FiUser className="icon-usuario"/><span className="nome-user">{user.nome}</span></Nav.Link>
+                              <Nav.Link href=""><FiUser className="icon-usuario"/><span className="nome-user"></span></Nav.Link>
                           </Nav>
                       </Container>
                    </Navbar>
