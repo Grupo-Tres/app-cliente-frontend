@@ -1,12 +1,23 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { Navbar, Nav, Container } from 'react-bootstrap';
 import logo from '../../assets/logo_corleone.png';
 import logo2 from '../../assets/pizza.png';
 import ModalLogin from '../ModalLogin/ModalLogin';
-import './Cabecalho.css'
+import './Cabecalho.css';
+import { FiUser, FiShoppingCart } from 'react-icons/fi';
+import Cookies from "universal-cookie";
 
 function Cabecalho() {
     const [modalShow, setModalShow] = useState(false);
+    const cookies = new Cookies();
+
+    const token = cookies.get('token');
+    console.log(token)
+
+    const logoff = () => {
+        cookies.remove('token');
+        console.log("Removido")
+    }
 
     const mostrarModal = () => {
         setModalShow(true);
@@ -47,17 +58,32 @@ function Cabecalho() {
                 </Container>
             </Navbar>
 
-            <Navbar expand="md" bg="light" variant="dark">
-                <Container fluid className="nav-bar-2">
-                    <Navbar.Brand href="/">Cardápio</Navbar.Brand>
-                    <Nav className="justify-content-end">
-                        <Nav.Link href="/contato">Contato</Nav.Link>
-                        <Nav.Link href="/cadastro">Cadastrar</Nav.Link>
-                        <Nav.Link onClick={mostrarModal}>Entrar</Nav.Link>
-                    </Nav>
-                </Container>
-            </Navbar>
-
+            <div>
+                {token === undefined ?
+                    <Navbar expand="md" bg="light" variant="dark">
+                        <Container fluid className="nav-bar-2">
+                            <Navbar.Brand href="/">Cardápio</Navbar.Brand>
+                            <Nav className="justify-content-end">
+                                <Nav.Link href="/contato">Contato</Nav.Link>
+                                <Nav.Link href="/cadastro">Cadastrar</Nav.Link>
+                                <Nav.Link onClick={mostrarModal}>Entrar</Nav.Link>
+                            </Nav>
+                        </Container>
+                    </Navbar>    :
+                    <Navbar expand="md" bg="light" variant="dark">
+                      <Container fluid className="nav-bar-2">
+                          <Navbar.Brand href="/">Cardápio</Navbar.Brand>
+                          <Nav className="justify-content-end">
+                              <Nav.Link href="/contato">Contato</Nav.Link>
+                              <Nav.Link href="/" onClick={logoff}>Sair</Nav.Link>
+                              <Nav.Link href=""><FiShoppingCart className="icon-usuario"/></Nav.Link>
+                              <Nav.Link href=""><FiUser className="icon-usuario"/><span className="nome-user"></span></Nav.Link>
+                          </Nav>
+                      </Container>
+                   </Navbar>
+                }
+            </div>
+           
             <ModalLogin show={modalShow} onHide={() => setModalShow(false)}></ModalLogin>
         </div>
     )
