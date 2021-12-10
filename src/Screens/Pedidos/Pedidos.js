@@ -11,7 +11,6 @@ function Pedidos() {
     // usar setStatus(x) com x variando de 0 a 4 para mudar a posicao da timeline
     // mapear 0 a 4 de acordo com o valor recebido do fetch do status
     const [pedido, setPedido] = useState(0)
-    const [seconds, setSeconds] = useState(0)
     const { Step } = Steps;
 
     //let numPedido = 436; // obter do fetch
@@ -27,18 +26,14 @@ function Pedidos() {
         }
     }
 
-    //var chamada = setInterval(buscaEstado, 5000);
-
     useEffect(() => {
         const interval = setInterval(() => {
-          //console.log(`seconds: ${seconds}`)
-            buscaEstado()
-          setSeconds(seconds + 1)
+          buscaEstado()
           console.log("Estado: ", pedido.status)
-          if (pedido.status === '5'){
+          if (pedido.status === 5){
             clearInterval(interval);
             console.log("Finalizado")
-            }
+          }
          }, 5000)
          
         return () => clearInterval(interval)
