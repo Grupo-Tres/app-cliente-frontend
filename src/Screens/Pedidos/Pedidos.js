@@ -4,6 +4,7 @@ import Table from 'react-bootstrap/Table'
 import { Steps } from 'antd';
 import 'antd/dist/antd.css';
 import Cookies from "universal-cookie";
+import { Button } from 'react-bootstrap';
 
 const cookies = new Cookies();
 
@@ -11,12 +12,25 @@ function Pedidos() {
     // usar setStatus(x) com x variando de 0 a 4 para mudar a posicao da timeline
     // mapear 0 a 4 de acordo com o valor recebido do fetch do status
     const [pedido, setPedido] = useState(0)
+    const [cancela, setCancela] = useState(false)
     const { Step } = Steps;
 
     //let numPedido = 436; // obter do fetch
 
     const cookieCarrinho = cookies.get("carrinho");
     const idPedido = cookieCarrinho.pedido.id;
+    
+
+    function cancelarPedido(){
+      if (pedido.status <= 1) {
+        cookies.remove("carrinho");
+        cookies.remove("pedido");
+        window.location.href = '/';
+      } else {
+        setCancela(true)
+      }
+      
+    }
 
 
     function atualizaPedido(dados) {
@@ -86,8 +100,8 @@ function Pedidos() {
                     <Step title="Preparando" description="Seu pedido está sendo preparado." />
                     <Step title="Saiu para Entrega" description="Seu pedido saiu para entrega." />
                     <Step title="Finalizado" description="Seu pedido foi entregue e finalizado." />
-                    
                 </Steps>
+                <Button className="btn-cancelar" active={!cancela} onClick={cancelarPedido} disabled={cancela} variant="danger">Cancelar Pedido</Button>
             </div>
             <Table striped bordered hover size="sm">
                 <thead>
