@@ -14,7 +14,9 @@
 }
 
 .logo2 {
-    
+    padding-left: 15px !important;
+    width: 5vw;
+    height: auto;
 }
 
 .icon-usuario {
