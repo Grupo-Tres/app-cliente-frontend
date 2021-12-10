@@ -14,6 +14,10 @@ function Carrinho(dados) {
     window.location.reload();
   }
 
+  const finalizarCarrinho = () => {
+    window.location.href = '/pedidos';
+  }
+
   const cookieCarrinho = cookies.get("carrinho");
 
   if (cookieCarrinho === undefined) {
@@ -74,7 +78,7 @@ function Carrinho(dados) {
       <Button 
               className="btn_finalizar"
               variant="success"
-              onClick={null} >Finalizar</Button>
+              onClick={finalizarCarrinho} >Finalizar</Button>
     </div>
   );
 }
