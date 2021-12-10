@@ -24,13 +24,21 @@ function Produto(produto) {
     });
   };
 
+  const openNotificationProduto = type => {
+    notification[type]({
+      message: 'Ok!',
+      description:
+        'O produto foi adicionado ao carrinho.',
+    });
+  };
+
   function click() {
     const token = cookies.get("token")
     const cookiePegoPedido = cookies.get("pedido")
 console.log("cookiePegoPedido: ", cookiePegoPedido)
     if (cookiePegoPedido) {
       cookiePegoPedido.forEach(element => {
-        if (element.status === "Pendente") {
+        if (element.status === 1) {
           setPedido(element)
         }
       });
@@ -72,6 +80,7 @@ console.log("Corpo do pedido: ", pedidoPendente.id)
             } 
             console.log("Dados do Carrinho: ", data)
             cookies.set("carrinho", data, { path: "/" });
+            openNotificationProduto("success")
             return data;
           })
           .catch(function (error) {
@@ -160,7 +169,7 @@ console.log("Corpo do pedido: ", pedidoPendente.id)
         </Modal.Header>
 
         <Modal.Body>
-          <img src={produto.children.foto} className="img-modal" style={{ height: '10% !important' }}></img>
+          <img src={produto.children.foto} alt="" className="img-modal" style={{ height: '10% !important' }}></img>
           <p>{produto.children.descricao}</p>
         </Modal.Body>
 
