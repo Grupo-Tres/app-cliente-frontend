@@ -3,6 +3,7 @@ import Cookies from "universal-cookie";
 import { Button } from 'react-bootstrap';
 //import ReactDOM from "react-dom";
 import React, { useState } from "react";
+import Table from 'react-bootstrap/Table'
 
 const cookies = new Cookies();
 
@@ -44,16 +45,20 @@ function Carrinho(dados) {
   return (
     <div class="carrinho">
       <div>Número do pedido: {cookieCarrinho.pedido.numeroPedido}</div>
-      <table>
-        <tr>
-          <th>Quant</th>
-          <th>Nome</th>
-          <th>Opção</th>
-          <th>Preço</th>
-          <th>Total</th>
-        </tr>
-        <React.Fragment>{linha}</React.Fragment>
-      </table>
+      <Table striped bordered hover size="sm">
+        <thead>
+          <tr>
+            <th>Quant</th>
+            <th>Nome</th>
+            <th>Opção</th>
+            <th>Preço</th>
+            <th>Total</th>
+          </tr>
+        </thead>
+        <tbody>
+          <React.Fragment>{linha}</React.Fragment>
+        </tbody>
+      </Table>
 
       <div>Subtotal: {subTotal}</div>
       <div>Taxa de entrega: {taxaEntrega}</div>
