@@ -30,7 +30,7 @@ function Pedidos() {
         const interval = setInterval(() => {
           buscaEstado()
           console.log("Estado: ", pedido.status)
-          if (pedido.status === 5){
+          if (pedido.status === 4){
             clearInterval(interval);
             console.log("Finalizado")
           }
