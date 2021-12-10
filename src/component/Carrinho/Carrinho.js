@@ -1,22 +1,24 @@
 import "./carrinho.css";
 import Cookies from "universal-cookie";
 import { Button } from 'react-bootstrap';
-//import ReactDOM from "react-dom";
-import React, { useState } from "react";
+import React from "react";
 import Table from 'react-bootstrap/Table'
 
 const cookies = new Cookies();
 
 function Carrinho(dados) {
-  //const carrinho = cookies.get('carrinho');
-  //const [compras, setCompras] = useState('');
 
   function esvaziarCarrinho() {
     cookies.remove("carrinho");
     cookies.remove("pedido");
     window.location.reload();
   }
+
   const cookieCarrinho = cookies.get("carrinho");
+
+  if (cookieCarrinho === undefined) {
+    return (<div className="carrinho">Seu carrinho está vazio</div>)
+  }
 
   const subTotal = cookieCarrinho.pedido.subTotal.toLocaleString("pt-BR", {
     style: "currency",
