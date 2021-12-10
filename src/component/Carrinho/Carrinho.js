@@ -10,6 +10,10 @@ function Carrinho(dados) {
   //const carrinho = cookies.get('carrinho');
   //const [compras, setCompras] = useState('');
 
+  function esvaziarCarrinho() {
+    cookies.remove("carrinho");
+    window.location.reload();
+  }
   const cookieCarrinho = cookies.get("carrinho");
 
   const subTotal = cookieCarrinho.pedido.subTotal.toLocaleString("pt-BR", {
@@ -40,10 +44,12 @@ function Carrinho(dados) {
     );
   });
 
-  console.log("Chegando: ", linha);
+
+
   return (
     <div class="carrinho">
       <div>Número do pedido: {cookieCarrinho.pedido.numeroPedido}</div>
+      <div onClick={esvaziarCarrinho}>Esvaziar carrinho</div>
       <table>
         <tr>
           <th>Quant</th>
