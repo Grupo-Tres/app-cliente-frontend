@@ -7,6 +7,7 @@ import './Cabecalho.css';
 import { FiUser, FiShoppingCart } from 'react-icons/fi';
 import Cookies from "universal-cookie";
 import Offcanvas from 'react-bootstrap/Offcanvas'
+import Carrinho from '../Carrinho/Carrinho';
 
 function Cabecalho() {
     const [modalShow, setModalShow] = useState(false);
@@ -14,6 +15,7 @@ function Cabecalho() {
 
     const token = cookies.get('token');
     console.log(token)
+    const carrinho = cookies.get('carrinho');
 
     const logoff = () => {
         cookies.remove('token');
@@ -40,7 +42,7 @@ function Cabecalho() {
                 <Offcanvas.Title>Meu Pedido <FiShoppingCart/></Offcanvas.Title>
               </Offcanvas.Header>
               <Offcanvas.Body>
-                Inserir logica para criar itens do carrinho de compras
+                <Carrinho nx={carrinho}>Teste</Carrinho>
               </Offcanvas.Body>
             </Offcanvas>
           </>
