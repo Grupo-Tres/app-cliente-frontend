@@ -46,8 +46,8 @@ function Carrinho(dados) {
         <td>{element.quantidade}</td>
         <td>{element.nome}</td>
         <td>{element.opcao}</td>
-        <td>{element.preco}</td>
-        <td>{element.preco * element.quantidade}</td>
+        <td>{element.preco.toFixed(2)}</td>
+        <td>{(element.preco * element.quantidade).toFixed(2)}</td>
       </tr>
     );
   });
