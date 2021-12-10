@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { Modal, Form, CloseButton, Button } from 'react-bootstrap';
 import "./Produto.css";
 import Cookies from "universal-cookie";
+import { notification } from 'antd';
+import 'antd/dist/antd.css'
 
 function Produto(produto) {
   const [quantidade, setQuantidade] = useState(1);
@@ -13,7 +15,14 @@ function Produto(produto) {
   const handleShow = () => setShow(true);
 
   const cookies = new Cookies();
-  
+
+  const openNotificationWithIcon = type => {
+    notification[type]({
+      message: 'IMPORTANTE!',
+      description:
+        'Faça seu login para adicionar itens ao carrinho.',
+    });
+  };
 
   function click() {
     const token = cookies.get("token")
@@ -70,7 +79,7 @@ console.log("Corpo do pedido: ", pedidoPendente.id)
           });
         //cookies.set("numeroPedido", Math.random() * 100, { path: "/" });
     } else {
-      alert('Faça login para adicionar produtos ao carrinho');
+      openNotificationWithIcon('error');
     }
     
   }
@@ -159,6 +168,7 @@ console.log("Corpo do pedido: ", pedidoPendente.id)
           <Button className="btn-add-carrinho" variant="success" onClick={handleClose}>Fechar</Button>
         </Modal.Footer>
       </Modal>
+
     </div>
   );
 }
