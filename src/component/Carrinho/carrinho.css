@@ -15,9 +15,13 @@ table {
     background-color: #dddddd;
   }
 
+  .carrinho {
+      height: auto important;
+  }
   .btn-add-carrinho {
     width: 142px;
     height: 28px;
     background-color: #008c45;
     line-height: 16px !important;
   }
+

@@ -13,6 +13,7 @@ function Carrinho(dados) {
 
   function esvaziarCarrinho() {
     cookies.remove("carrinho");
+    cookies.remove("pedido");
     window.location.reload();
   }
   const cookieCarrinho = cookies.get("carrinho");
@@ -48,8 +49,9 @@ function Carrinho(dados) {
 
 
   return (
-    <div class="carrinho">
+    <div className="carrinho">
       <div>Número do pedido: {cookieCarrinho.pedido.numeroPedido}</div>
+      <div className="esvaziar" onClick={esvaziarCarrinho}>Esvaziar carrinho</div>
       <Table striped bordered hover size="sm">
         <thead>
           <tr>
