@@ -107,7 +107,7 @@ function Cabecalho() {
                                         </span>
                                     }
                                 id='collasible-nav-dropdown'>
-                                <NavDropdown.Item href="#action/3.1">Meus Pedidos</NavDropdown.Item>
+                                <NavDropdown.Item href="/pedidos">Meus Pedidos</NavDropdown.Item>
                                 <NavDropdown.Item href="#action/3.2">Minha Conta</NavDropdown.Item>
                                 <NavDropdown.Divider />
                                 <NavDropdown.Item href="/" onClick={logoff}>Sair</NavDropdown.Item>
