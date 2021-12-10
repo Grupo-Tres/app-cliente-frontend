@@ -4,6 +4,7 @@ import Table from 'react-bootstrap/Table'
 import { Steps } from 'antd';
 import 'antd/dist/antd.css';
 import Cookies from "universal-cookie";
+import { Button } from 'react-bootstrap';
 
 const cookies = new Cookies();
 
@@ -86,8 +87,8 @@ function Pedidos() {
                     <Step title="Preparando" description="Seu pedido está sendo preparado." />
                     <Step title="Saiu para Entrega" description="Seu pedido saiu para entrega." />
                     <Step title="Finalizado" description="Seu pedido foi entregue e finalizado." />
-                    
                 </Steps>
+                <Button className="btn-cancelar" onClick={null} disabled={false} variant="danger">Cancelar Pedido</Button>
             </div>
             <Table striped bordered hover size="sm">
                 <thead>
