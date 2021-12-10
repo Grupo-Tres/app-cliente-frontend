@@ -52,8 +52,7 @@ function Carrinho(dados) {
 
   return (
     <div className="carrinho">
-      <div>Número do pedido: {cookieCarrinho.pedido.numeroPedido}</div>
-      <div className="esvaziar" onClick={esvaziarCarrinho}>Esvaziar carrinho</div>
+      <div className="label">Número do pedido: {cookieCarrinho.pedido.numeroPedido}</div>
       <Table striped bordered hover size="sm">
         <thead>
           <tr>
@@ -68,12 +67,12 @@ function Carrinho(dados) {
           <React.Fragment>{linha}</React.Fragment>
         </tbody>
       </Table>
-
-      <div>Subtotal: {subTotal}</div>
-      <div>Taxa de entrega: {taxaEntrega}</div>
-      <div>Total: {total}</div>
+      <div className="esvaziar" onClick={esvaziarCarrinho}>Esvaziar carrinho</div>
+      <div className="label">Subtotal: <span className="dado">{subTotal}</span></div>
+      <div className="label">Taxa de entrega: <span className="dado">{taxaEntrega}</span></div>
+      <div className="label">Total: <span className="dado">{total}</span></div>
       <Button 
-              className="btn-finalizar"
+              className="btn_finalizar"
               variant="success"
               onClick={null} >Finalizar</Button>
     </div>
