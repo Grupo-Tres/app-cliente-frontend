@@ -66,8 +66,6 @@ function Cabecalho() {
                         <img className="logo2"
                             alt=""
                             src={logo2}
-                            width="6%"
-                            height="6%"
                         />
                     </Navbar.Brand>
                     <Navbar.Toggle />

@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { Modal, Form, CloseButton, Button } from 'react-bootstrap';
 import "./Produto.css";
 import Cookies from "universal-cookie";
+import { notification } from 'antd';
+import 'antd/dist/antd.css'
 
 function Produto(produto) {
   const [quantidade, setQuantidade] = useState(1);
@@ -13,7 +15,22 @@ function Produto(produto) {
   const handleShow = () => setShow(true);
 
   const cookies = new Cookies();
-  
+
+  const openNotificationWithIcon = type => {
+    notification[type]({
+      message: 'IMPORTANTE!',
+      description:
+        'Faça seu login para adicionar itens ao carrinho.',
+    });
+  };
+
+  const openNotificationProduto = type => {
+    notification[type]({
+      message: 'Ok!',
+      description:
+        'O produto foi adicionado ao carrinho.',
+    });
+  };
 
   function click() {
     const token = cookies.get("token")
@@ -21,7 +38,7 @@ function Produto(produto) {
 console.log("cookiePegoPedido: ", cookiePegoPedido)
     if (cookiePegoPedido) {
       cookiePegoPedido.forEach(element => {
-        if (element.status === "Pendente") {
+        if (element.status === 1) {
           setPedido(element)
         }
       });
@@ -63,6 +80,7 @@ console.log("Corpo do pedido: ", pedidoPendente.id)
             } 
             console.log("Dados do Carrinho: ", data)
             cookies.set("carrinho", data, { path: "/" });
+            openNotificationProduto("success")
             return data;
           })
           .catch(function (error) {
@@ -70,7 +88,7 @@ console.log("Corpo do pedido: ", pedidoPendente.id)
           });
         //cookies.set("numeroPedido", Math.random() * 100, { path: "/" });
     } else {
-      alert('Faça login para adicionar produtos ao carrinho');
+      openNotificationWithIcon('error');
     }
     
   }
@@ -151,7 +169,7 @@ console.log("Corpo do pedido: ", pedidoPendente.id)
         </Modal.Header>
 
         <Modal.Body>
-          <img src={produto.children.foto} className="img-modal" style={{ height: '10% !important' }}></img>
+          <img src={produto.children.foto} alt="" className="img-modal" style={{ height: '10% !important' }}></img>
           <p>{produto.children.descricao}</p>
         </Modal.Body>
 
@@ -159,6 +177,7 @@ console.log("Corpo do pedido: ", pedidoPendente.id)
           <Button className="btn-add-carrinho" variant="success" onClick={handleClose}>Fechar</Button>
         </Modal.Footer>
       </Modal>
+
     </div>
   );
 }
