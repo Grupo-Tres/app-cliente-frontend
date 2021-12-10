@@ -33,6 +33,8 @@ function Pedidos() {
           if (pedido.status === 4){
             clearInterval(interval);
             console.log("Finalizado")
+            cookies.remove("carrinho");
+            cookies.remove("pedido");
           }
          }, 5000)
          
