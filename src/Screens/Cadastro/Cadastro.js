@@ -24,9 +24,9 @@ const validationSchema = Yup.object().shape({
   .required('Forneça uma senha!') 
   .min(6, 'Senha muito curta - Mínimo de 6 caracteres!')
   .matches(senhaRegExp, 'Senha deve conter apenas letras!'),
-  cep: Yup.string()
+  /* cep: Yup.string()
   .matches(cepRegExp, "*CEP inválido!")
-  .required("*O campo CEP é obrigatório!"),
+  .required("*O campo CEP é obrigatório!"),*/
   telefone: Yup.string()
   .matches(phoneRegExp, "*Numero de telefone inválido!")
   .required("*O campo telefone é obrigatório!"),
