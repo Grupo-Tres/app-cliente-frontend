@@ -3,7 +3,7 @@ import { Modal, Form, CloseButton, Button } from 'react-bootstrap';
 import "./Produto.css";
 import Cookies from "universal-cookie";
 import { notification } from 'antd';
-import 'antd/dist/antd.css'
+// import 'antd/dist/antd.css'
 
 function Produto(produto) {
   const [quantidade, setQuantidade] = useState(1);

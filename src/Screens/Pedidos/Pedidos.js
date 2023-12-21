@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import './Pedidos.css';
 import Table from 'react-bootstrap/Table'
 import { Steps } from 'antd';
-import 'antd/dist/antd.css';
+//import 'antd/dist/antd.css';
 import Cookies from "universal-cookie";
 import { Button } from 'react-bootstrap';
 
